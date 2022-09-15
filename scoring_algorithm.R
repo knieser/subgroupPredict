@@ -1,7 +1,8 @@
-subgroupPredict <- function(X){
+subgroupPredict <- function(X, survey){
  
   # load parameters 
-  parameters <- readRDS("data/parameters.RData")
+  infile = paste0("data/",survey,"_parameters.RData")
+  parameters <- readRDS(infile)
   nu = parameters$nu
   lambda = parameters$lambda
   psi = parameters$psi
