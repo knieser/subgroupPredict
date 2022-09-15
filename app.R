@@ -3,7 +3,7 @@ source("scoring_algorithm.R")
 
 # Define UI ----
 ui <- fluidPage(
-  titlePanel("Depressive Subgroup Prediction Calculator"),
+  titlePanel("Depressive Subgroup Prediction Calculator (Proof-of-Concept)"),
   
   mainPanel(           
     tabsetPanel(id = "survey",
