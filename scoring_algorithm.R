@@ -1,12 +1,13 @@
 subgroupPredict <- function(X){
  
   # load parameters 
-  readRDS("data/output.RData")
-  nu = output$nu
-  lambda = output$lambda
-  psi = output$psi
-  gamma = output$gamma
-  epsilon = output$epsilon
+  parameters <- readRDS("data/parameters.RData")
+  nu = parameters$nu
+  lambda = parameters$lambda
+  psi = parameters$psi
+  gamma = parameters$gamma
+  epsilon = parameters$epsilon
+  p = length(nu)
   
   # calculate log-likelihoods
   sigma = lambda %*% t(lambda) + diag(psi)
