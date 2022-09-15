@@ -3,7 +3,7 @@ source("scoring_algorithm.R")
 
 # Define UI ----
 ui <- fluidPage(
-  titlePanel("Beck Depression Inventory"),
+  titlePanel("BDI Subgroup Prediction Calculator"),
   
   mainPanel(
     radioButtons("q1", h3("1. Sadness"), choices = list("0" = 0,
@@ -126,21 +126,18 @@ ui <- fluidPage(
 # Define server logic ----
 server <- function(input, output) {
   
-  dataInput <- reactive({
+  dataInput <- eventReactive(input$submit, {
     as.numeric(c(input$q1, input$q2, input$q3, input$q4, input$q5, input$q6, input$q7, 
                  input$q8, input$q9, input$q10, input$q11, input$q12, input$q13, input$q14, 
-                 input$q15, input$q16, input$q17, input$q18, input$q19, input$q20, input$q21 
-                 ))
+                 input$q15, input$q16, input$q17, input$q18, input$q19, input$q20, input$q21)
+               )
     })
   
-  observeEvent(input$submit, {
-    output$total = renderText({paste("Total: ", sum(dataInput()))})
+  output$total = renderText({paste("Total: ", sum(dataInput()))})
   
-    output$predictedSubgroup = renderText({paste("Predicted probability of being in self-judgement subgroup: ", 
-                                               round(subgroupPredict(t(dataInput())),3)
-                                               )})
-  })
-  
+  output$predictedSubgroup = renderText({paste("Predicted probability of being in self-judgement subgroup: ", 
+                                             round(subgroupPredict(t(dataInput())),2))
+    })
 }
 
 # Run the app ----
