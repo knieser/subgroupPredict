@@ -3,7 +3,15 @@ source("scoring_algorithm.R")
 
 # Define UI ----
 ui <- fluidPage(
-  titlePanel("Depressive Subgroup Prediction Calculator (Proof-of-Concept)"),
+  titlePanel("Depressive Subgroup Prediction Calculator (proof-of-concept)"),
+  p(strong("Note: "),"Parameters used by this prediction calculator 
+  were estimated from a sample of
+  postpartum women who had a history of major depressive disorder, 
+  were actively seeking psychiatric care, 
+  and predominately identified as White and non-Hispanic. 
+  Before this tool could be recommended clinically, 
+  parameter estimates should be obtained from a large, representative sample 
+  of perinatal women.", style = "color:red"),
   
   mainPanel(           
     tabsetPanel(id = "survey",
@@ -140,7 +148,7 @@ ui <- fluidPage(
     h3(textOutput("total")),
     h3(textOutput("predictedSubgroup")),
     hr(),
-    actionButton("submit", h3("Submit")),
+    actionButton("submit", h4("Submit")),
     hr()
       ) # main panel
 ) # page
@@ -162,10 +170,9 @@ server <- function(input, output) {
                                         input$bdi13, input$bdi14, input$bdi15,
                                         input$bdi16, input$bdi17, input$bdi18,
                                         input$bdi19, input$bdi20, input$bdi21)
-    )}
-    
-
+                     )}
     })
+  
   
   output$total <- renderText({paste("Total: ", sum(dataInput()))})
                                     
